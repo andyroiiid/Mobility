@@ -8,41 +8,104 @@ namespace Player
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float moveAcceleration = 100.0f;
-        [SerializeField] private float jumpSpeed = 10.0f;
+        [SerializeField] private float jumpSpeed = 8.0f;
         [SerializeField] private float gravity = 20.0f;
         [SerializeField] private float moveDrag = 10.0f;
         [SerializeField] private float fallDrag = 0.5f;
+        [SerializeField] private float crouchHeight = 1.2f;
 
         [NonSerialized] public Vector2 MoveInput;
 
+        public float EyeHeight => _physics.height - _physics.radius;
+
         private CharacterController _physics;
+
+#region Velocity
 
         private Vector3 _prevPosition;
         private Vector3 _velocity = Vector3.zero;
         private Vector3 _acceleration = Vector3.zero;
 
+#endregion
+
         private bool _isOnGround;
+
+#region Crouch
+
+        private bool _isCrouching;
+
+        private bool IsCrouching
+        {
+            get => _isCrouching;
+            set
+            {
+                _isCrouching = value;
+                _physics.SetHeight(value ? crouchHeight : _standUpHeight);
+            }
+        }
+
+        private bool _wantToStandUp;
+        private float _standUpHeight;
+
+#endregion
 
         private void Awake()
         {
             _physics = GetComponent<CharacterController>();
             _prevPosition = transform.position;
+            _standUpHeight = _physics.height;
         }
 
         public void Jump()
         {
             if (!_isOnGround) return;
+            if (IsCrouching) return;
             _velocity.y = jumpSpeed;
         }
 
-        private void GroundCheck()
-        {
-            var halfHeight = _physics.height / 2;
-            var radius = _physics.radius;
-            var origin = transform.position + Vector3.down * (halfHeight - radius);
+#region Crouch
 
-            _isOnGround = Physics.SphereCast(origin, radius, Vector3.down, out _, 0.1f);
+        public void Crouch()
+        {
+            IsCrouching = true;
         }
+
+        public void UnCrouch()
+        {
+            _wantToStandUp = true;
+        }
+
+        private bool HeadCheck()
+        {
+            return _physics.HeadCast(out _, _standUpHeight - crouchHeight);
+        }
+
+        private bool TryToStandUp()
+        {
+            if (!IsCrouching)
+            {
+                // already standing
+                return true;
+            }
+
+            if (HeadCheck())
+            {
+                // can't stand up
+                return false;
+            }
+
+            IsCrouching = false;
+            return true;
+        }
+
+#endregion
+
+        private void FootCheck()
+        {
+            _isOnGround = _physics.FootCast(out _, 0.1f);
+        }
+
+#region Velocity
 
         private void UpdateAcceleration()
         {
@@ -75,9 +138,16 @@ namespace Player
             _prevPosition = position;
         }
 
+#endregion
+
         private void FixedUpdate()
         {
-            GroundCheck();
+            if (_wantToStandUp && TryToStandUp())
+            {
+                _wantToStandUp = false;
+            }
+
+            FootCheck();
             UpdateAcceleration();
             UpdateVelocity();
 

@@ -52,7 +52,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &4102567388704207621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +148,23 @@ MonoBehaviour:
       m_Action: Jump Input
       m_Flags: 0
     m_Flags: 0
+  crouchInput:
+    m_Name: Crouch Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a4860359-0f22-4ce8-b912-99d981b35456
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: d6290f57-4da4-4570-a2fa-60adf62b0d15
+      m_Path: <Keyboard>/leftCtrl
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Crouch Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!114 &4102567388704207620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveAcceleration: 100
-  jumpSpeed: 10
+  jumpSpeed: 8
   gravity: 20
   moveDrag: 10
   fallDrag: 0.5

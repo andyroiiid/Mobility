@@ -1,4 +1,3 @@
-using Extensions;
 using UnityEngine;
 
 namespace Player
@@ -9,8 +8,6 @@ namespace Player
     {
         private PlayerInput _input;
         private PlayerMovement _movement;
-
-        private float _eyeHeight = 0.5f;
 
         private const float PitchLimit = 89.999f;
         private float _pitch;
@@ -23,6 +20,8 @@ namespace Player
             _input.OnMove += OnMoveInput;
             _input.OnLook += OnLookInput;
             _input.OnJump += _movement.Jump;
+            _input.OnCrouch += _movement.Crouch;
+            _input.OnUnCrouch += _movement.UnCrouch;
         }
 
         private void OnMoveInput(Vector2 input)
@@ -38,7 +37,7 @@ namespace Player
 
         public Vector3 GetEyePosition()
         {
-            return transform.position + Vector3.up * _eyeHeight;
+            return transform.position + Vector3.up * _movement.EyeHeight;
         }
 
         public Quaternion GetEyeRotation()

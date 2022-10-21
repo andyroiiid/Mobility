@@ -6,18 +6,16 @@ namespace Player
 {
     public class PlayerInput : MonoBehaviour
     {
-        [SerializeField]
-        private InputAction moveInput;
-
-        [SerializeField]
-        private InputAction lookInput;
-
-        [SerializeField]
-        private InputAction jumpInput;
+        [SerializeField] private InputAction moveInput;
+        [SerializeField] private InputAction lookInput;
+        [SerializeField] private InputAction jumpInput;
+        [SerializeField] private InputAction crouchInput;
 
         public UnityAction<Vector2> OnMove;
         public UnityAction<Vector2> OnLook;
         public UnityAction OnJump;
+        public UnityAction OnCrouch;
+        public UnityAction OnUnCrouch;
 
         private void Awake()
         {
@@ -35,7 +33,11 @@ namespace Player
             lookInput.canceled += OnLookInput;
 
             jumpInput.Enable();
-            jumpInput.started += OnJumpInput;
+            jumpInput.started += _ => OnJump?.Invoke();
+
+            crouchInput.Enable();
+            crouchInput.performed += _ => OnCrouch?.Invoke();
+            crouchInput.canceled += _ => OnUnCrouch?.Invoke();
         }
 
         private void OnMoveInput(InputAction.CallbackContext ctx)
@@ -46,11 +48,6 @@ namespace Player
         private void OnLookInput(InputAction.CallbackContext ctx)
         {
             OnLook?.Invoke(ctx.ReadValue<Vector2>());
-        }
-
-        private void OnJumpInput(InputAction.CallbackContext ctx)
-        {
-            OnJump?.Invoke();
         }
     }
 }
