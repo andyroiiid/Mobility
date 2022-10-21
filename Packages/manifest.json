@@ -1,0 +1,36 @@
+{
+  "dependencies": {
+    "com.jetbrains.riderflow": "2022.1.3-222",
+    "com.unity.feature.development": "1.0.1",
+    "com.unity.ide.rider": "3.0.16",
+    "com.unity.inputsystem": "1.4.3",
+    "com.unity.mathematics": "1.2.6",
+    "com.unity.postprocessing": "3.2.2",
+    "com.unity.probuilder": "5.0.6",
+    "com.unity.test-framework": "1.3.0",
+    "com.unity.toolchain.win-x86_64-linux-x86_64": "2.0.2",
+    "com.unity.ugui": "1.0.0",
+    "com.unity.modules.ai": "1.0.0",
+    "com.unity.modules.animation": "1.0.0",
+    "com.unity.modules.imageconversion": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0",
+    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.unity.modules.nvidia": "1.0.0",
+    "com.unity.modules.particlesystem": "1.0.0",
+    "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.screencapture": "1.0.0",
+    "com.unity.modules.subsystems": "1.0.0",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.modules.uielements": "1.0.0",
+    "com.unity.modules.umbra": "1.0.0"
+  },
+  "scopedRegistries": [
+    {
+      "name": "Jetbrains",
+      "url": "https://npm.pkg.jetbrains.space/public/p/jetbrains-gamedev/jetbrains-gamedev/",
+      "scopes": [
+        "com.jetbrains"
+      ]
+    }
+  ]
+}
