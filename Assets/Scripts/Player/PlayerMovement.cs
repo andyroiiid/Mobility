@@ -28,7 +28,12 @@ namespace Player
 
 #endregion
 
+#region Jump
+
         private bool _isOnGround;
+        private CoyoteTimer _coyoteTimer;
+
+#endregion
 
 #region Crouch
 
@@ -53,15 +58,33 @@ namespace Player
         {
             _physics = GetComponent<CharacterController>();
             _prevPosition = transform.position;
+            _coyoteTimer = new CoyoteTimer(_physics);
             _standUpHeight = _physics.height;
+        }
+
+#region Jump
+
+        private void GroundCheck()
+        {
+            _isOnGround = _physics.FootCast(out _, 0.1f);
+            _coyoteTimer.Update(_isOnGround, Time.fixedDeltaTime);
         }
 
         public void Jump()
         {
-            if (!_isOnGround) return;
-            if (IsCrouching) return;
-            _velocity.y = jumpSpeed;
+            if (IsCrouching)
+            {
+                // can't jump when crouching
+                return;
+            }
+
+            if (_coyoteTimer.CanJump)
+            {
+                _velocity.y = jumpSpeed;
+            }
         }
+
+#endregion
 
 #region Crouch
 
@@ -75,11 +98,6 @@ namespace Player
             _wantToStandUp = true;
         }
 
-        private bool HeadCheck()
-        {
-            return _physics.HeadCast(out _, _standUpHeight - crouchHeight);
-        }
-
         private bool TryToStandUp()
         {
             if (!IsCrouching)
@@ -88,9 +106,9 @@ namespace Player
                 return true;
             }
 
-            if (HeadCheck())
+            if (_physics.HeadCast(out _, _standUpHeight - crouchHeight))
             {
-                // can't stand up
+                // not enough space to stand up
                 return false;
             }
 
@@ -99,11 +117,6 @@ namespace Player
         }
 
 #endregion
-
-        private void FootCheck()
-        {
-            _isOnGround = _physics.FootCast(out _, 0.1f);
-        }
 
 #region Velocity
 
@@ -147,7 +160,7 @@ namespace Player
                 _wantToStandUp = false;
             }
 
-            FootCheck();
+            GroundCheck();
             UpdateAcceleration();
             UpdateVelocity();
 
