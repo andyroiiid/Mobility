@@ -65,9 +65,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8179f5c73f6473d4f922c9aa1e3e991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveInput: {fileID: 11400000, guid: 0ee78b4167fa3524a98fbb5152e35cdc, type: 2}
-  lookInput: {fileID: 11400000, guid: 2d44c191880c0e248986bab7a437bb0a, type: 2}
-  jumpInput: {fileID: 11400000, guid: bdce826f93312754e9a6a072098c23fc, type: 2}
+  moveInput:
+    m_Name: Move Input
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: 4f3ad043-7bab-4f14-aed6-dbf587dd1d50
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: Keyboard
+      m_Id: 12630da7-273f-48d7-92b5-e9e9d2f23fcc
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move Input
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 37811da0-7f0d-483f-b3c3-1889b2381807
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move Input
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 20ce8a3f-39ce-46f8-9294-e4f0887ca575
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move Input
+      m_Flags: 8
+    - m_Name: left
+      m_Id: bb1274cf-bdb3-4a23-9cc3-bf2a5e1531a8
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move Input
+      m_Flags: 8
+    - m_Name: right
+      m_Id: b17d8362-fe02-4f0e-aa2f-5a2a61e9cf9d
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move Input
+      m_Flags: 8
+    m_Flags: 0
+  lookInput:
+    m_Name: Look Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d81282a6-078f-4c2d-af31-9d02de6f09dc
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9d8838c7-3638-4dd2-b2c4-4d9eb52b91ee
+      m_Path: <Mouse>/delta
+      m_Interactions: 
+      m_Processors: ScaleVector2(x=0.1,y=0.1)
+      m_Groups: 
+      m_Action: Look Input
+      m_Flags: 0
+    m_Flags: 0
+  jumpInput:
+    m_Name: Jump Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 636abecf-9cda-46ad-8ef9-1433c528ff41
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: f03ae7f1-c5db-4fda-b822-76d434cee61f
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!114 &4102567388704207620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +163,7 @@ MonoBehaviour:
   moveAcceleration: 100
   jumpSpeed: 10
   gravity: 20
-  groundDrag: 10
+  moveDrag: 10
   fallDrag: 0.5
 --- !u!114 &4102567388704207674
 MonoBehaviour:

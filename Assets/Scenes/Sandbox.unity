@@ -191,7 +191,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19884
+  m_Name: pb_Mesh26650
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1633,7 +1633,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19898
+  m_Name: pb_Mesh26664
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1791,18 +1791,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &1216896415 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4102567388704207674, guid: 1dac4bdc7e000ce4b8fd70f5156e22d5, type: 3}
-  m_PrefabInstance: {fileID: 4102567389635849893}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 992a754e517841e4aae9a80957dba579, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1001 &4102567389635849893
+--- !u!1001 &1393949825
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1859,6 +1848,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dac4bdc7e000ce4b8fd70f5156e22d5, type: 3}
+--- !u!114 &1393949826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4102567388704207674, guid: 1dac4bdc7e000ce4b8fd70f5156e22d5, type: 3}
+  m_PrefabInstance: {fileID: 1393949825}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992a754e517841e4aae9a80957dba579, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5326338407916188445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1869,7 +1869,7 @@ PrefabInstance:
     - target: {fileID: 5326338408299372136, guid: 3496d0d9c68dbf743a3fc8b498907095, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1216896415}
+      objectReference: {fileID: 1393949826}
     - target: {fileID: 5326338408299372137, guid: 3496d0d9c68dbf743a3fc8b498907095, type: 3}
       propertyPath: m_RootOrder
       value: 1
