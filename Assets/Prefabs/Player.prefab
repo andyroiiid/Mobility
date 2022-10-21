@@ -177,11 +177,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309aa89ea658fef4d9fc6353c3f6dbfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAcceleration: 100
-  jumpSpeed: 8
+  groundAcceleration: 50
+  airAcceleration: 25
+  jumpSpeed: 9
   gravity: 20
-  moveDrag: 10
+  groundDrag: 5
+  airDrag: 2.5
   fallDrag: 0.5
+  crouchHeight: 1.2
 --- !u!114 &4102567388704207674
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,10 +7,12 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private float moveAcceleration = 100.0f;
-        [SerializeField] private float jumpSpeed = 8.0f;
+        [SerializeField] private float groundAcceleration = 50.0f;
+        [SerializeField] private float airAcceleration = 25.0f;
+        [SerializeField] private float jumpSpeed = 9.0f;
         [SerializeField] private float gravity = 20.0f;
-        [SerializeField] private float moveDrag = 10.0f;
+        [SerializeField] private float groundDrag = 5.0f;
+        [SerializeField] private float airDrag = 2.5f;
         [SerializeField] private float fallDrag = 0.5f;
         [SerializeField] private float crouchHeight = 1.2f;
 
@@ -133,28 +135,32 @@ namespace Player
 
 #region Velocity
 
+        private void CalcHorizontalAcceleration(Vector2 direction, float acceleration, float drag)
+        {
+            _acceleration.x = direction.x * acceleration - _velocity.x * drag;
+            _acceleration.z = direction.y * acceleration - _velocity.z * drag;
+        }
+
         private void UpdateAcceleration()
         {
             var facing = -transform.eulerAngles.y * Mathf.Deg2Rad;
             var direction = MoveInput.Rotate2D(facing);
 
-            _acceleration.x = direction.x * moveAcceleration;
-            _acceleration.z = direction.y * moveAcceleration;
-            _acceleration.y = -gravity;
-        }
+            if (_isOnGround)
+            {
+                CalcHorizontalAcceleration(direction, groundAcceleration, groundDrag);
+            }
+            else
+            {
+                CalcHorizontalAcceleration(direction, airAcceleration, airDrag);
+            }
 
-        private static float LerpToZero(float value, float alpha)
-        {
-            return Mathf.Lerp(value, 0, Time.fixedDeltaTime * alpha);
+            _acceleration.y = -gravity - _velocity.y * fallDrag;
         }
 
         private void UpdateVelocity()
         {
             _velocity += Time.fixedDeltaTime * _acceleration;
-
-            _velocity.x = LerpToZero(_velocity.x, moveDrag);
-            _velocity.z = LerpToZero(_velocity.z, moveDrag);
-            _velocity.y = LerpToZero(_velocity.y, fallDrag);
         }
 
         private void CalcVelocityBasedOnMovement()
