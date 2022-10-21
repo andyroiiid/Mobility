@@ -11,8 +11,9 @@ namespace Player
         [SerializeField] private float airAcceleration = 25.0f;
         [SerializeField] private float jumpSpeed = 9.0f;
         [SerializeField] private float gravity = 20.0f;
-        [SerializeField] private float groundDrag = 5.0f;
-        [SerializeField] private float airDrag = 2.5f;
+        [SerializeField] private float groundDrag = 10.0f;
+        [SerializeField] private float crouchDrag = 20.0f;
+        [SerializeField] private float airDrag = 5.0f;
         [SerializeField] private float fallDrag = 0.5f;
         [SerializeField] private float crouchHeight = 1.2f;
 
@@ -34,7 +35,6 @@ namespace Player
 #region Jump
 
         private bool _isOnGround;
-        private bool _prevIsOnGround;
         private JumpBuffer _jumpBuffer;
         private CoyoteTimer _coyoteTimer;
 
@@ -72,7 +72,6 @@ namespace Player
 
         private void GroundCheck()
         {
-            _prevIsOnGround = _isOnGround;
             _isOnGround = _physics.FootCast(out _, 0.1f);
         }
 
@@ -107,6 +106,12 @@ namespace Player
 
         public void Crouch()
         {
+            if (!_isOnGround)
+            {
+                // can't crouch in air
+                return;
+            }
+
             IsCrouching = true;
         }
 
@@ -150,7 +155,7 @@ namespace Player
 
             if (_isOnGround)
             {
-                CalcHorizontalAcceleration(direction, groundAcceleration, groundDrag);
+                CalcHorizontalAcceleration(direction, groundAcceleration, IsCrouching ? crouchDrag : groundDrag);
             }
             else
             {
@@ -170,7 +175,7 @@ namespace Player
             var position = transform.position;
             _velocity = (position - _prevPosition) / Time.fixedDeltaTime;
 
-            if (_isOnGround && _prevIsOnGround)
+            if (_isOnGround)
             {
                 // prevent the boost from stepping up
                 _velocity.y = 0.0f;

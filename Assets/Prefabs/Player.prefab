@@ -181,8 +181,9 @@ MonoBehaviour:
   airAcceleration: 25
   jumpSpeed: 9
   gravity: 20
-  groundDrag: 5
-  airDrag: 2.5
+  groundDrag: 10
+  crouchDrag: 20
+  airDrag: 5
   fallDrag: 0.5
   crouchHeight: 1.2
 --- !u!114 &4102567388704207674
