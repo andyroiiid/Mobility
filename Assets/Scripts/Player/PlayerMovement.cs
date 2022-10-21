@@ -24,6 +24,7 @@ namespace Player
 
         private Vector3 _prevPosition;
         private Vector3 _velocity = Vector3.zero;
+        public Vector3 Velocity => _velocity;
         private Vector3 _acceleration = Vector3.zero;
 
 #endregion
