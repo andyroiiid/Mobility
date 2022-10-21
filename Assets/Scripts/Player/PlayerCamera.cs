@@ -20,8 +20,13 @@ namespace Player
         private void Update()
         {
             var timeError = Time.time - Time.fixedTime;
-            transform.position = player.GetEyePosition() + _playerMovement.Velocity * timeError;
-            transform.LerpRotation(player.GetEyeRotation(), Time.deltaTime * 30.0f);
+
+            var targetPosition = player.GetEyePosition() + _playerMovement.Velocity * timeError;
+            var targetRotation = player.GetEyeRotation();
+
+            var lerp = Time.deltaTime * 30.0f;
+            transform.LerpPosition(targetPosition, lerp);
+            transform.LerpRotation(targetRotation, lerp);
         }
     }
 }
