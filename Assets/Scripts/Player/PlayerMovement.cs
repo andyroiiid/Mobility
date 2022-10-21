@@ -34,6 +34,7 @@ namespace Player
 #region Jump
 
         private bool _isOnGround;
+        private bool _prevIsOnGround;
         private JumpBuffer _jumpBuffer;
         private CoyoteTimer _coyoteTimer;
 
@@ -71,6 +72,7 @@ namespace Player
 
         private void GroundCheck()
         {
+            _prevIsOnGround = _isOnGround;
             _isOnGround = _physics.FootCast(out _, 0.1f);
         }
 
@@ -167,6 +169,13 @@ namespace Player
         {
             var position = transform.position;
             _velocity = (position - _prevPosition) / Time.fixedDeltaTime;
+
+            if (_isOnGround && _prevIsOnGround)
+            {
+                // prevent the boost from stepping up
+                _velocity.y = 0.0f;
+            }
+
             _prevPosition = position;
         }
 
@@ -174,8 +183,6 @@ namespace Player
 
         private void FixedUpdate()
         {
-            GroundCheck();
-
             _jumpBuffer.Update(Time.fixedDeltaTime);
             _coyoteTimer.Update(_isOnGround, Time.fixedDeltaTime);
             TryJump();
@@ -190,6 +197,7 @@ namespace Player
 
             _physics.Move(_velocity * Time.fixedDeltaTime);
 
+            GroundCheck();
             CalcVelocityBasedOnMovement();
         }
     }
