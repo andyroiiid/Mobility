@@ -32,6 +32,7 @@ namespace Player
 #region Jump
 
         private bool _isOnGround;
+        private JumpBuffer _jumpBuffer;
         private CoyoteTimer _coyoteTimer;
 
 #endregion
@@ -59,7 +60,8 @@ namespace Player
         {
             _physics = GetComponent<CharacterController>();
             _prevPosition = transform.position;
-            _coyoteTimer = new CoyoteTimer(_physics);
+            _jumpBuffer = new JumpBuffer();
+            _coyoteTimer = new CoyoteTimer();
             _standUpHeight = _physics.height;
         }
 
@@ -68,10 +70,14 @@ namespace Player
         private void GroundCheck()
         {
             _isOnGround = _physics.FootCast(out _, 0.1f);
-            _coyoteTimer.Update(_isOnGround, Time.fixedDeltaTime);
         }
 
         public void Jump()
+        {
+            _jumpBuffer.QueueJump();
+        }
+
+        private void TryJump()
         {
             if (IsCrouching)
             {
@@ -79,7 +85,13 @@ namespace Player
                 return;
             }
 
-            if (_coyoteTimer.CanJump)
+            if (!_coyoteTimer.CanJump)
+            {
+                // leaving ground for too long
+                return;
+            }
+
+            if (_jumpBuffer.TryConsumeJump())
             {
                 _velocity.y = jumpSpeed;
             }
@@ -99,7 +111,7 @@ namespace Player
             _wantToStandUp = true;
         }
 
-        private bool TryToStandUp()
+        private bool TryStandUp()
         {
             if (!IsCrouching)
             {
@@ -156,12 +168,17 @@ namespace Player
 
         private void FixedUpdate()
         {
-            if (_wantToStandUp && TryToStandUp())
+            GroundCheck();
+
+            _jumpBuffer.Update(Time.fixedDeltaTime);
+            _coyoteTimer.Update(_isOnGround, Time.fixedDeltaTime);
+            TryJump();
+
+            if (_wantToStandUp && TryStandUp())
             {
                 _wantToStandUp = false;
             }
 
-            GroundCheck();
             UpdateAcceleration();
             UpdateVelocity();
 

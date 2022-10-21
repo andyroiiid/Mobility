@@ -4,22 +4,20 @@ namespace Player
 {
     public class CoyoteTimer
     {
-        private readonly CharacterController _physics;
-        private readonly float _coyoteTime;
+        private readonly float _time;
 
         private float _timer;
 
         public bool CanJump => _timer > 0;
 
-        public CoyoteTimer(CharacterController physics, float coyoteTime = 0.2f)
+        public CoyoteTimer(float time = 0.2f)
         {
-            _physics = physics;
-            _coyoteTime = coyoteTime;
+            _time = time;
         }
 
         public void Update(bool isOnGround, float deltaTime)
         {
-            _timer = isOnGround ? _coyoteTime : Mathf.Max(0, _timer - deltaTime);
+            _timer = isOnGround ? _time : Mathf.Max(0, _timer - deltaTime);
         }
     }
 }
