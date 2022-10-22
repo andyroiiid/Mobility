@@ -3270,10 +3270,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4102567388704207620, guid: 1dac4bdc7e000ce4b8fd70f5156e22d5, type: 3}
-      propertyPath: crouchDrag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 4102567388704207672, guid: 1dac4bdc7e000ce4b8fd70f5156e22d5, type: 3}
       propertyPath: m_RootOrder
       value: 2

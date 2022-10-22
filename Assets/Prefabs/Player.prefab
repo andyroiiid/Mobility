@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4102567388704207675}
   - component: {fileID: 4102567388704207621}
   - component: {fileID: 4102567388704207620}
+  - component: {fileID: 8362501093194510972}
+  - component: {fileID: 7035501340749168586}
   - component: {fileID: 4102567388704207674}
   m_Layer: 0
   m_Name: Player
@@ -126,7 +128,7 @@ MonoBehaviour:
       m_Id: 9d8838c7-3638-4dd2-b2c4-4d9eb52b91ee
       m_Path: <Mouse>/delta
       m_Interactions: 
-      m_Processors: ScaleVector2(x=0.1,y=0.1)
+      m_Processors: ScaleVector2(x=0.05,y=0.05)
       m_Groups: 
       m_Action: Look Input
       m_Flags: 0
@@ -179,13 +181,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundAcceleration: 50
   airAcceleration: 25
-  jumpSpeed: 9
   gravity: 20
   groundDrag: 10
-  crouchDrag: 20
+  crouchDrag: 25
   airDrag: 5
   fallDrag: 0.5
+--- !u!114 &8362501093194510972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102567388704207673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41982c3e2e2240b469643b274b79974c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   crouchHeight: 1.2
+--- !u!114 &7035501340749168586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102567388704207673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c31945371033e4182018672d131468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpSpeed: 9
 --- !u!114 &4102567388704207674
 MonoBehaviour:
   m_ObjectHideFlags: 0
