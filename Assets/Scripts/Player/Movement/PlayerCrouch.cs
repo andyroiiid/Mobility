@@ -1,7 +1,7 @@
 using Extensions;
 using UnityEngine;
 
-namespace Player
+namespace Player.Movement
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerMovement))]

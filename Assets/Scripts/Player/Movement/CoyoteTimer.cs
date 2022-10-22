@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Player
+namespace Player.Movement
 {
     public class CoyoteTimer
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Player
+namespace Player.Movement
 {
     [RequireComponent(typeof(PlayerMovement))]
     public class PlayerJump : MonoBehaviour
