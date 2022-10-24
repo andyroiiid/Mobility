@@ -15,6 +15,11 @@ namespace Player.Movement
             _time = time;
         }
 
+        public void Suppress()
+        {
+            _timer = 0.0f;
+        }
+
         public void Update(bool isOnGround, float deltaTime)
         {
             _timer = isOnGround ? _time : Mathf.Max(0, _timer - deltaTime);

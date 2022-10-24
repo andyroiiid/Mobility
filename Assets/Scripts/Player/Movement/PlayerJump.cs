@@ -40,6 +40,8 @@ namespace Player.Movement
             }
 
             _movement.Launch(Vector3.up * jumpSpeed, overrideY: true);
+
+            _coyoteTimer.Suppress(); // disable coyote time when player jumps
         }
 
         private void FixedUpdate()
