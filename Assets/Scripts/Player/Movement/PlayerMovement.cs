@@ -35,13 +35,13 @@ namespace Player.Movement
             _physics = GetComponent<CharacterController>();
             _crouch = GetComponent<PlayerCrouch>();
             _jump = GetComponent<PlayerJump>();
+        }
 
-            _jump.OnLaunchCharacter += velocity =>
-            {
-                _velocity.x += velocity.x;
-                _velocity.z += velocity.z;
-                _velocity.y = velocity.y;
-            };
+        public void Launch(Vector3 velocity, bool overrideX = false, bool overrideY = false, bool overrideZ = false)
+        {
+            _velocity.x = overrideX ? velocity.x : _velocity.x + velocity.x;
+            _velocity.y = overrideY ? velocity.y : _velocity.y + velocity.y;
+            _velocity.z = overrideZ ? velocity.z : _velocity.z + velocity.z;
         }
 
         public void Jump() => _jump.Jump();
@@ -63,6 +63,8 @@ namespace Player.Movement
 
         private void UpdateAcceleration()
         {
+            _acceleration = Vector3.zero;
+
             var facing = -transform.eulerAngles.y * Mathf.Deg2Rad;
             var direction = MoveInput.Rotate2D(facing);
 
@@ -74,9 +76,8 @@ namespace Player.Movement
             else
             {
                 CalcHorizontalAcceleration(direction, airAcceleration, airDrag);
+                _acceleration.y = -gravity - _velocity.y * fallDrag;
             }
-
-            _acceleration.y = -gravity - _velocity.y * fallDrag;
         }
 
         private void FixedUpdate()

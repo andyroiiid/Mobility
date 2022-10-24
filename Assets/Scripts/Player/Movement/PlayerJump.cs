@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Player.Movement
 {
@@ -7,8 +6,6 @@ namespace Player.Movement
     public class PlayerJump : MonoBehaviour
     {
         [SerializeField] private float jumpSpeed = 9.0f;
-
-        public UnityAction<Vector3> OnLaunchCharacter;
 
         private PlayerMovement _movement;
 
@@ -42,7 +39,7 @@ namespace Player.Movement
                 return;
             }
 
-            OnLaunchCharacter?.Invoke(Vector3.up * jumpSpeed);
+            _movement.Launch(Vector3.up * jumpSpeed, overrideY: true);
         }
 
         private void FixedUpdate()
