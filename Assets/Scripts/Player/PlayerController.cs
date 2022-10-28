@@ -5,21 +5,24 @@ namespace Player
 {
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerMovement))]
+    [RequireComponent(typeof(RecallAbility))]
     public class PlayerController : MonoBehaviour
     {
         private PlayerInput _input;
         private PlayerMovement _movement;
+        private RecallAbility _recall;
 
         private const float PitchLimit = 89.999f;
         private float _pitch;
 
         private bool _inputLocked;
-        private Vector2 _movementInputBeforeLocking;
+        private Vector2 _cachedMovementInput;
 
         private void Awake()
         {
             _input = GetComponent<PlayerInput>();
             _movement = GetComponent<PlayerMovement>();
+            _recall = GetComponent<RecallAbility>();
 
             _input.OnMove += OnMoveInput;
             _input.OnLook += OnLookInput;
@@ -29,18 +32,18 @@ namespace Player
             _input.OnAbility += OnAbilityInput;
         }
 
-        private void LockInput(bool locked)
+        public void LockInput(bool locked)
         {
             // cache and clear movement input
             if (locked)
             {
-                _movementInputBeforeLocking = _movement.MoveInput;
+                _cachedMovementInput = _movement.MoveInput;
                 _movement.MoveInput = Vector2.zero;
             }
             else
             {
-                _movement.MoveInput = _movementInputBeforeLocking;
-                _movementInputBeforeLocking = Vector2.zero;
+                _movement.MoveInput = _cachedMovementInput;
+                _cachedMovementInput = Vector2.zero;
             }
 
             _inputLocked = locked;
@@ -48,8 +51,14 @@ namespace Player
 
         private void OnMoveInput(Vector2 input)
         {
-            if (_inputLocked) return;
-            _movement.MoveInput = input;
+            if (_inputLocked)
+            {
+                _cachedMovementInput = input;
+            }
+            else
+            {
+                _movement.MoveInput = input;
+            }
         }
 
         private void OnLookInput(Vector2 input)
@@ -79,8 +88,7 @@ namespace Player
 
         private void OnAbilityInput()
         {
-            LockInput(!_inputLocked);
-            _movement.enabled = !_inputLocked;
+            _recall.BeginRecall();
         }
 
         public Vector3 GetEyePosition()
