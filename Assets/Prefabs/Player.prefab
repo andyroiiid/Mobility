@@ -167,6 +167,23 @@ MonoBehaviour:
       m_Action: Crouch Input
       m_Flags: 0
     m_Flags: 0
+  abilityInput:
+    m_Name: Ability Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4a493a6b-e4dd-41a2-9c06-a5d7f30a3588
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 7b5c5e57-80fb-4ab7-97f4-2e3faea5125f
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Ability Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!114 &4102567388704207620
 MonoBehaviour:
   m_ObjectHideFlags: 0
