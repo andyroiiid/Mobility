@@ -57,6 +57,8 @@ namespace Player.Movement
         {
             IsOnGround = _physics.FootCast(out var hit, 0.1f);
 
+            if (!hit.collider) return; // keep velocity in air
+
             var groundRigidbody = hit.rigidbody;
             _baseVelocity = groundRigidbody ? groundRigidbody.GetPointVelocity(hit.point) : Vector3.zero;
             _baseRotationSpeed = groundRigidbody ? groundRigidbody.angularVelocity.y * Mathf.Rad2Deg : 0.0f;
