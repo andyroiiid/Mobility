@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utilities;
 
 namespace Extensions
 {
@@ -13,5 +14,7 @@ namespace Extensions
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, alpha);
         }
+
+        public static TransformSnapshot CreateSnapshot(this Transform transform) => new TransformSnapshot(transform);
     }
 }

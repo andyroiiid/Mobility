@@ -1,3 +1,4 @@
+using Player.Abilities;
 using Player.Movement;
 using UnityEngine;
 
@@ -5,12 +6,11 @@ namespace Player
 {
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerMovement))]
-    [RequireComponent(typeof(RecallAbility))]
     public class PlayerController : MonoBehaviour
     {
         private PlayerInput _input;
         private PlayerMovement _movement;
-        private RecallAbility _recall;
+        private AbilityRecall _recall;
 
         private const float PitchLimit = 89.999f;
         private float _pitch;
@@ -22,7 +22,7 @@ namespace Player
         {
             _input = GetComponent<PlayerInput>();
             _movement = GetComponent<PlayerMovement>();
-            _recall = GetComponent<RecallAbility>();
+            _recall = GetComponent<AbilityRecall>();
 
             _input.OnMove += OnMoveInput;
             _input.OnLook += OnLookInput;
