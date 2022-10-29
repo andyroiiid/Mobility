@@ -5,6 +5,8 @@ namespace Player
 {
     public class PlayerCamera : MonoBehaviour
     {
+        public Ray EyeRay => new(transform.position, transform.forward);
+
         private void Awake()
         {
             GameStatics.Register(ref GameStatics.PlayerCamera, this);

@@ -5,10 +5,12 @@ namespace Player
 {
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerMovement))]
+    [RequireComponent(typeof(PlayerUse))]
     public class PlayerController : MonoBehaviour
     {
         private PlayerInput _input;
         private PlayerMovement _movement;
+        private PlayerUse _use;
 
         private const float PitchLimit = 89.999f;
         private float _pitch;
@@ -22,6 +24,7 @@ namespace Player
 
             _input = GetComponent<PlayerInput>();
             _movement = GetComponent<PlayerMovement>();
+            _use = GetComponent<PlayerUse>();
 
             _input.OnMove += OnMoveInput;
             _input.OnLook += OnLookInput;
@@ -87,7 +90,8 @@ namespace Player
 
         private void OnAbilityInput()
         {
-            Debug.Log("Activate ability.");
+            if (_inputLocked) return;
+            _use.Use();
         }
 
         public Vector3 GetPredictedEyePosition()

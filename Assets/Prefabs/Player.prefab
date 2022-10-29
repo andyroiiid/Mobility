@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4102567388704207620}
   - component: {fileID: 8362501093194510972}
   - component: {fileID: 7035501340749168586}
+  - component: {fileID: 8774586800227741302}
   - component: {fileID: 4102567388704207674}
   m_Layer: 0
   m_Name: Player
@@ -229,6 +230,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSpeed: 9
+--- !u!114 &8774586800227741302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102567388704207673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 713ea08e32ab98b4284de98e34ff42b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useDistance: 4
 --- !u!114 &4102567388704207674
 MonoBehaviour:
   m_ObjectHideFlags: 0
