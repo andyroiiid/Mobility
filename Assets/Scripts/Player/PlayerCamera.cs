@@ -1,28 +1,28 @@
 using Extensions;
-using Player.Movement;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerCamera : MonoBehaviour
     {
-        [SerializeField] private PlayerController player;
-
-        private PlayerMovement _playerMovement;
+        private void Awake()
+        {
+            GameStatics.Register(ref GameStatics.PlayerCamera, this);
+        }
 
         private void Start()
         {
-            _playerMovement = player.GetComponent<PlayerMovement>();
+            var player = GameStatics.PlayerController;
 
-            transform.position = player.GetEyePosition();
+            transform.position = player.GetPredictedEyePosition();
             transform.rotation = player.GetEyeRotation();
         }
 
         private void Update()
         {
-            var timeError = Time.time - Time.fixedTime;
+            var player = GameStatics.PlayerController;
 
-            var targetPosition = player.GetEyePosition() + _playerMovement.Velocity * timeError;
+            var targetPosition = player.GetPredictedEyePosition();
             var targetRotation = player.GetEyeRotation();
 
             var lerp = Time.deltaTime * 30.0f;

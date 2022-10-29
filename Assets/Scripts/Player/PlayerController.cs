@@ -20,6 +20,8 @@ namespace Player
 
         private void Awake()
         {
+            GameStatics.Register(ref GameStatics.PlayerController, this);
+
             _input = GetComponent<PlayerInput>();
             _movement = GetComponent<PlayerMovement>();
             _recall = GetComponent<AbilityRecall>();
@@ -91,9 +93,10 @@ namespace Player
             _recall.BeginRecall();
         }
 
-        public Vector3 GetEyePosition()
+        public Vector3 GetPredictedEyePosition()
         {
-            return transform.position + Vector3.up * _movement.EyeHeight;
+            var timeError = Time.time - Time.fixedTime;
+            return transform.position + Vector3.up * _movement.EyeHeight + _movement.Velocity * timeError;
         }
 
         public Quaternion GetEyeRotation()
