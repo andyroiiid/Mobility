@@ -9,7 +9,7 @@ public class LevelEssentials : MonoBehaviour
 
     private void Awake()
     {
-        GameStatics.Register(ref GameStatics.LevelEssentials, this);
+        GameStatics.RegisterLevelEssentials(this);
 
         _transform = transform;
 

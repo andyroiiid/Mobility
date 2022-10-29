@@ -20,7 +20,7 @@ namespace Player
 
         private void Awake()
         {
-            GameStatics.Register(ref GameStatics.PlayerController, this);
+            GameStatics.RegisterPlayerController(this);
 
             _input = GetComponent<PlayerInput>();
             _movement = GetComponent<PlayerMovement>();

@@ -9,7 +9,7 @@ namespace Player
 
         private void Awake()
         {
-            GameStatics.Register(ref GameStatics.PlayerCamera, this);
+            GameStatics.RegisterPlayerCamera(this);
         }
 
         private void Start()
