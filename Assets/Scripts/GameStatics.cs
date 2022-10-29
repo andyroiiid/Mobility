@@ -3,6 +3,7 @@ using UnityEngine;
 
 public static class GameStatics
 {
+    public static LevelEssentials LevelEssentials;
     public static PlayerController PlayerController;
     public static PlayerCamera PlayerCamera;
 
