@@ -1,4 +1,3 @@
-using Player.Abilities;
 using Player.Movement;
 using UnityEngine;
 
@@ -10,7 +9,6 @@ namespace Player
     {
         private PlayerInput _input;
         private PlayerMovement _movement;
-        private AbilityRecall _recall;
 
         private const float PitchLimit = 89.999f;
         private float _pitch;
@@ -24,7 +22,6 @@ namespace Player
 
             _input = GetComponent<PlayerInput>();
             _movement = GetComponent<PlayerMovement>();
-            _recall = GetComponent<AbilityRecall>();
 
             _input.OnMove += OnMoveInput;
             _input.OnLook += OnLookInput;
@@ -90,7 +87,7 @@ namespace Player
 
         private void OnAbilityInput()
         {
-            _recall.BeginRecall();
+            Debug.Log("Activate ability.");
         }
 
         public Vector3 GetPredictedEyePosition()
