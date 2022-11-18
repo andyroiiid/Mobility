@@ -31,7 +31,7 @@ namespace Player
             _input.OnJump += OnJumpInput;
             _input.OnCrouch += OnCrouchInput;
             _input.OnUnCrouch += OnUnCrouchInput;
-            _input.OnAbility += OnAbilityInput;
+            _input.OnUse += OnUseInput;
         }
 
         public void LockInput(bool locked)
@@ -88,7 +88,7 @@ namespace Player
             _movement.UnCrouch();
         }
 
-        private void OnAbilityInput()
+        private void OnUseInput()
         {
             if (_inputLocked) return;
             _use.Use();

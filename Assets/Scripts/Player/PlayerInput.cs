@@ -10,14 +10,14 @@ namespace Player
         [SerializeField] private InputAction lookInput;
         [SerializeField] private InputAction jumpInput;
         [SerializeField] private InputAction crouchInput;
-        [SerializeField] private InputAction abilityInput;
+        [SerializeField] private InputAction useInput;
 
         public UnityAction<Vector2> OnMove;
         public UnityAction<Vector2> OnLook;
         public UnityAction OnJump;
         public UnityAction OnCrouch;
         public UnityAction OnUnCrouch;
-        public UnityAction OnAbility;
+        public UnityAction OnUse;
 
         private void Awake()
         {
@@ -41,8 +41,8 @@ namespace Player
             crouchInput.performed += _ => OnCrouch?.Invoke();
             crouchInput.canceled += _ => OnUnCrouch?.Invoke();
 
-            abilityInput.Enable();
-            abilityInput.performed += _ => OnAbility?.Invoke();
+            useInput.Enable();
+            useInput.performed += _ => OnUse?.Invoke();
         }
 
         private void OnMoveInput(InputAction.CallbackContext ctx)
