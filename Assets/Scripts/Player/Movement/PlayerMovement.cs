@@ -9,6 +9,8 @@ namespace Player.Movement
     [RequireComponent(typeof(PlayerJump))]
     public class PlayerMovement : MonoBehaviour
     {
+        private const float GroundNormalYLimit = 0.7071067811865475f;
+
         [SerializeField] private float groundAcceleration = 50.0f;
         [SerializeField] private float airAcceleration = 25.0f;
         [SerializeField] private float gravity = 20.0f;
@@ -55,7 +57,7 @@ namespace Player.Movement
 
         private void GroundCheck()
         {
-            IsOnGround = _physics.FootCast(out var hit, 0.1f);
+            IsOnGround = _physics.FootCast(out var hit, 0.1f) && hit.normal.y > GroundNormalYLimit;
 
             if (!hit.collider) return; // keep velocity in air
 
