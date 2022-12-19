@@ -129,7 +129,7 @@ MonoBehaviour:
       m_Id: 9d8838c7-3638-4dd2-b2c4-4d9eb52b91ee
       m_Path: <Mouse>/delta
       m_Interactions: 
-      m_Processors: ScaleVector2(x=0.05,y=0.05)
+      m_Processors: ScaleVector2(x=0.025,y=0.025)
       m_Groups: 
       m_Action: Look Input
       m_Flags: 0

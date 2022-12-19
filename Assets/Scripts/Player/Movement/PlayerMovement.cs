@@ -59,11 +59,18 @@ namespace Player.Movement
         {
             IsOnGround = _physics.FootCast(out var hit, 0.1f) && hit.normal.y > GroundNormalYLimit;
 
-            if (!hit.collider) return; // keep velocity in air
-
-            var groundRigidbody = hit.rigidbody;
-            _baseVelocity = groundRigidbody ? groundRigidbody.GetPointVelocity(hit.point) : Vector3.zero;
-            _baseRotationSpeed = groundRigidbody ? groundRigidbody.angularVelocity.y * Mathf.Rad2Deg : 0.0f;
+            if (!hit.collider)
+            {
+                // keep linear velocity but
+                // lose angular velocity immediately
+                _baseRotationSpeed = 0.0f;
+            }
+            else
+            {
+                var groundRigidbody = hit.rigidbody;
+                _baseVelocity = groundRigidbody ? groundRigidbody.GetPointVelocity(hit.point) : Vector3.zero;
+                _baseRotationSpeed = groundRigidbody ? groundRigidbody.angularVelocity.y * Mathf.Rad2Deg : 0.0f;
+            }
         }
 
         private void CalcHorizontalAcceleration(Vector2 direction, float acceleration, float drag)
