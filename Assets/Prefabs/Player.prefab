@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7035501340749168586}
   - component: {fileID: 8774586800227741302}
   - component: {fileID: 4102567388704207674}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -168,21 +168,21 @@ MonoBehaviour:
       m_Action: Crouch Input
       m_Flags: 0
     m_Flags: 0
-  useInput:
-    m_Name: Use Input
+  interactInput:
+    m_Name: Interact Input
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 63567199-3488-4ec7-84ec-460b017a0811
+    m_Id: bde6ca6c-fdf0-4c02-985d-a1f66511f20c
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: d524c35a-4128-4056-9566-506b656d8acd
-      m_Path: <Keyboard>/e
+      m_Id: 293bd773-2cd8-43ea-b673-1ca5ec3d77ef
+      m_Path: <Mouse>/leftButton
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Use Input
+      m_Action: Interact Input
       m_Flags: 0
     m_Flags: 0
 --- !u!114 &4102567388704207620
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713ea08e32ab98b4284de98e34ff42b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useDistance: 4
+  interactDistance: 2
 --- !u!114 &4102567388704207674
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -10,14 +11,14 @@ namespace Player
         [SerializeField] private InputAction lookInput;
         [SerializeField] private InputAction jumpInput;
         [SerializeField] private InputAction crouchInput;
-        [SerializeField] private InputAction useInput;
+        [SerializeField] private InputAction interactInput;
 
         public UnityAction<Vector2> OnMove;
         public UnityAction<Vector2> OnLook;
         public UnityAction OnJump;
         public UnityAction OnCrouch;
         public UnityAction OnUnCrouch;
-        public UnityAction OnUse;
+        public UnityAction OnInteract;
 
         private void Awake()
         {
@@ -41,8 +42,8 @@ namespace Player
             crouchInput.performed += _ => OnCrouch?.Invoke();
             crouchInput.canceled += _ => OnUnCrouch?.Invoke();
 
-            useInput.Enable();
-            useInput.performed += _ => OnUse?.Invoke();
+            interactInput.Enable();
+            interactInput.performed += _ => OnInteract?.Invoke();
         }
 
         private void OnMoveInput(InputAction.CallbackContext ctx)

@@ -46,6 +46,11 @@ namespace Environment
             _transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
         }
 
+        public override InteractType GetInteractType()
+        {
+            return InteractType.Use;
+        }
+
         public override void OnUse()
         {
             _frozen = !_frozen;

@@ -5,12 +5,12 @@ namespace Player
 {
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerMovement))]
-    [RequireComponent(typeof(PlayerUse))]
+    [RequireComponent(typeof(PlayerInteract))]
     public class PlayerController : MonoBehaviour
     {
         private PlayerInput _input;
         private PlayerMovement _movement;
-        private PlayerUse _use;
+        private PlayerInteract _interact;
 
         private const float PitchLimit = 89.999f;
         private float _pitch;
@@ -24,14 +24,14 @@ namespace Player
 
             _input = GetComponent<PlayerInput>();
             _movement = GetComponent<PlayerMovement>();
-            _use = GetComponent<PlayerUse>();
+            _interact = GetComponent<PlayerInteract>();
 
             _input.OnMove += OnMoveInput;
             _input.OnLook += OnLookInput;
             _input.OnJump += OnJumpInput;
             _input.OnCrouch += OnCrouchInput;
             _input.OnUnCrouch += OnUnCrouchInput;
-            _input.OnUse += OnUseInput;
+            _input.OnInteract += OnInteractInput;
         }
 
         public void LockInput(bool locked)
@@ -88,10 +88,10 @@ namespace Player
             _movement.UnCrouch();
         }
 
-        private void OnUseInput()
+        private void OnInteractInput()
         {
             if (_inputLocked) return;
-            _use.Use();
+            _interact.Interact();
         }
 
         public Vector3 GetPredictedEyePosition()
