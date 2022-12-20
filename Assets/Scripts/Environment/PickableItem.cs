@@ -20,10 +20,16 @@ namespace Environment
             _meshRenderer = GetComponent<MeshRenderer>();
         }
 
-        private void Update()
+        private void Start()
+        {
+            _targetPosition = _rigidbody.position;
+            _targetRotation = _rigidbody.rotation;
+        }
+
+        private void FixedUpdate()
         {
             if (!_pickedUp) return;
-            _rigidbody.position = _targetPosition;
+            _rigidbody.velocity = (_targetPosition - _rigidbody.position) / Time.fixedDeltaTime;
             _rigidbody.rotation = _targetRotation;
         }
 
@@ -45,13 +51,17 @@ namespace Environment
         public override void OnPickUp()
         {
             _pickedUp = true;
-            _rigidbody.isKinematic = true;
+            gameObject.layer = LayerMask.NameToLayer("Ignore Player");
+            _rigidbody.useGravity = false;
+            _rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
         }
 
         public override void OnDrop()
         {
             _pickedUp = false;
-            _rigidbody.isKinematic = false;
+            gameObject.layer = LayerMask.NameToLayer("Default");
+            _rigidbody.useGravity = true;
+            _rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
         }
 
         public override void OnMove(Vector3 position, Quaternion rotation)

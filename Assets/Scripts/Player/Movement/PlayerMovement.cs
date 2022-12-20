@@ -68,8 +68,10 @@ namespace Player.Movement
             else
             {
                 var groundRigidbody = hit.rigidbody;
-                _baseVelocity = groundRigidbody ? groundRigidbody.GetPointVelocity(hit.point) : Vector3.zero;
-                _baseRotationSpeed = groundRigidbody ? groundRigidbody.angularVelocity.y * Mathf.Rad2Deg : 0.0f;
+                // only accept base velocity from kinematic bodies
+                var inheritVelocity = groundRigidbody && groundRigidbody.isKinematic;
+                _baseVelocity = inheritVelocity ? groundRigidbody.GetPointVelocity(hit.point) : Vector3.zero;
+                _baseRotationSpeed = inheritVelocity ? groundRigidbody.angularVelocity.y * Mathf.Rad2Deg : 0.0f;
             }
         }
 

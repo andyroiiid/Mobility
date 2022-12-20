@@ -38,24 +38,6 @@ namespace Player
             UpdateCurrentInteractable(newCollider != null ? newCollider.GetComponent<Interactable>() : null);
         }
 
-        private Vector3 QueryHoldingPosition(Ray eyeRay, float distance)
-        {
-            if (Physics.BoxCast(
-                    eyeRay.origin,
-                    _currentCollider.bounds.extents,
-                    eyeRay.direction,
-                    out var hit,
-                    Quaternion.LookRotation(eyeRay.direction),
-                    distance,
-                    LayerMask.NameToLayer("Player")
-                ))
-            {
-                distance = hit.distance;
-            }
-
-            return eyeRay.GetPoint(distance);
-        }
-
         private void Update()
         {
             var eyeRay = GameStatics.PlayerCamera.EyeRay;
@@ -63,8 +45,8 @@ namespace Player
             {
                 var pickable = (Pickable)_currentInteractable;
                 pickable.OnMove(
-                    QueryHoldingPosition(eyeRay, 1.0f),
-                    Quaternion.LookRotation(eyeRay.direction)
+                    eyeRay.GetPoint(1.5f),
+                    Quaternion.LookRotation(eyeRay.direction, Vector3.up)
                 );
             }
             else

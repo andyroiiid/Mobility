@@ -15,7 +15,7 @@ namespace Extensions
         {
             var radius = physics.radius;
             var origin = physics.transform.position + physics.center + dir * (physics.height / 2 - radius);
-            return Physics.SphereCast(origin, radius, dir, out hit, dist);
+            return Physics.SphereCast(origin, radius, dir, out hit, dist, LayerMask.GetMask("Default"));
         }
 
         public static bool HeadCast(this CharacterController physics, out RaycastHit hitInfo, float distance)
